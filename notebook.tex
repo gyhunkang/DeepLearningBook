@@ -1,0 +1,563 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{DLBook\_ch07}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{chapter-7}{%
+\subsection{Chapter 7}\label{chapter-7}}
+
+    \hypertarget{regularization-for-deep-learning}{%
+\subsection{Regularization for Deep
+Learning}\label{regularization-for-deep-learning}}
+
+    Regularization - any modification we make to a learning algorithm that
+is intended to reduce its generalization error but not its training
+error.
+
+    Most regularization strategies are based on regularizing estimators
+Regularization of an estimator works by trading increased bias for
+reduced variance 
+
+    Three situations: 1. excluded the true data generating process -
+corresponding to underfitting and inducing bias 1. matched the true data
+generating process 1. included the generating process buy also many
+other possible generating processes
+
+    The Goal of Regularization is to take a model from the third regime into
+the second regime
+
+    But, We almost never have access to the true data generating process so
+we can never know for sure if the model family being estimated includes
+the generating process or not
+
+    controlling the complexity of the model is not a simple matter of
+finding the model of the right size, with the right number of parameters
+Instead, we might find that the best fitting model (in the sense of
+minimizing generalization error) is a large model that has been
+regularized appropriately.
+
+    \hypertarget{parameter-norm-penalties}{%
+\subsubsection{7.1 Parameter Norm
+Penalties}\label{parameter-norm-penalties}}
+
+    Many regularization approaches are based on limiting the capacity of
+models
+
+    \hypertarget{note-that-for-neural-networks-we-typically-choose-to-use-a-parameter-norm-penalty-that-ux3c9-penalizes-of-the-affine-transformation-at-each-layer-and-leaves-only-the-weights-the-biases-unregularized.-each-bias-controls-only-a-single-variable.-this-means-that-we-do-not-induce-too-much-variance-by-leaving-the-biases-unregularized.-also-regularizing-the-bias-parameters-can-introduce-a-significant-amount-of-underfitting}{%
+\subparagraph{Note that for neural networks, we typically choose to use
+a parameter norm penalty that Ω penalizes of the affine transformation
+at each layer and leaves only the weights the biases unregularized. Each
+bias controls only a single variable. This means that we do not induce
+too much variance by leaving the biases unregularized. Also,
+regularizing the bias parameters can introduce a significant amount of
+underfitting}\label{note-that-for-neural-networks-we-typically-choose-to-use-a-parameter-norm-penalty-that-ux3c9-penalizes-of-the-affine-transformation-at-each-layer-and-leaves-only-the-weights-the-biases-unregularized.-each-bias-controls-only-a-single-variable.-this-means-that-we-do-not-induce-too-much-variance-by-leaving-the-biases-unregularized.-also-regularizing-the-bias-parameters-can-introduce-a-significant-amount-of-underfitting}}
+
+    it is still reasonable to use the same weight decay at all layers just
+to reduce the size of search space.
+
+    \hypertarget{l2-parameter-regularization}{%
+\subsubsection{\texorpdfstring{7.1.1 \(\;L^2\) Parameter
+Regularization}{7.1.1 \textbackslash{};L\^{}2 Parameter Regularization}}\label{l2-parameter-regularization}}
+
+    a.k.a. weight decay, ridge regression, Tikhonov regularization This
+strategy drives the weights closer to the origin by adding a
+regularization term
+\({\Omega}({\Theta})\; = \; \frac{1}{2}\left\Vert{\omega}\right\Vert^2_2\)
+
+    \$ \omega ; = ; Q(A;+\alpha I)\textsuperscript{\{-1\}AQ}T\omega\^{}* \$
+
+    effect of weight decay is to rescale \(\omega\) along the axes defined
+by the eigenvectors of \$H;=;QAQ\^{}T \$
+
+    Specifically, the component of \(\omega\) that is alogned with the
+\(i\)-th eigenvector of \(H\) is rescaled by a factor of
+\(\frac{\lambda_i}{\lambda_i + \alpha}\)
+
+    Along the direction where eigenvalues of \(H\) are relatively large (ie.
+\(\lambda_i >> \alpha\) ), effect of regularization is relatively small.
+However, components with \$\lambda\_i \textless{}\textless{} \alpha \$
+will be shrunk to have nearly zero magnitude
+
+    Only the directions along which the parameters contribute significantly
+to reducing the objective function are preserved relatively intact. In
+directions that do NOT contribute to reducing the objective function, a
+small eigenvalue of the Hessian tells us that movement in this direction
+will not significantly increase the gradient.
+
+    \hypertarget{l1-regularization}{%
+\subsubsection{\texorpdfstring{7.1.2 \(\;L^1\)
+Regularization}{7.1.2 \textbackslash{};L\^{}1 Regularization}}\label{l1-regularization}}
+
+    \(\Omega (\theta) \; = \; \left\Vert{\omega}\right\Vert_1 \; = \sum_{i} \left\vert {\omega_i}\right\vert\)
+
+    In comparison to \(L^2\) regularization, \(L^1\) regularization results
+in a solution that is more sparse
+
+    The sparsity property induced by \(L^1\) regularization has been used
+extensively as a feature selection mechanism LASSO (Least Absolute
+Shrinkage and Selection Operator) model integrates an \(L^1\) penalty
+with a linear model and a least squares cost function
+
+    \(L^2\) \textasciitilde{} MAP Bayesian inference with a Guassian prior
+on the weights
+
+    \(L^1\) \textasciitilde{} MAP Bayesian inference with an isotropic
+Laplace distribution on the weights
+
+    \hypertarget{norm-penalties-as-constrained-optimization}{%
+\subsubsection{7.2 Norm Penalties as Constrained
+Optimization}\label{norm-penalties-as-constrained-optimization}}
+
+    Consider the cost function regularized by a parameter norm penalty 
+
+    \$ \hat{J}(\theta;X,y) ; = J(\theta;X,y) ; + \alpha\Omega(\theta) \$
+
+    Can Minimize a function subject to Constraints by constructing a
+generalized Lagrange function consisting of the original objective
+function + a set of penalties 
+
+    \begin{itemize}
+\tightlist
+\item
+  Each penalty is a product between a Coefficient (KKT multiplier) and a
+  function representing whether the constraint is satisfied
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  If to constrain \(\Omega(\theta)\) to be less than some constant
+  \(k\), a generalized Lagrange function: 
+\end{itemize}
+
+\begin{equation*}
+\mathcal{L}(\theta,\alpha;X,y)\; = \; J(\theta; X,y)\; + \; \alpha(\Omega(\theta)\; - k)
+\end{equation*}
+
+    \begin{equation*}
+\theta^* = 
+\underset{\theta}{\text{arg min}} \;
+\underset{\alpha,\alpha \geq 0}{\text{max}}\;{\mathcal{L}(\theta,\alpha)}
+\end{equation*}
+
+    solving this problem requires modifying both \(\theta\) and \(\alpha\) -
+\(\alpha\) must increase whenever \(\Omega(\theta) > k\) - \(\alpha\)
+must decrease whenever \(\Omega(\theta) < k\) - All positive \(\alpha\)
+encourage \(\Omega(\theta)\) to shrink - Optimal value \(\alpha^*\) will
+encourage \(\Omega(\theta)\) to shrink, but not so strongly to make
+\(\Omega(\theta) < k\)
+
+    Can also use explicit constraints rather than penalties
+
+    \begin{itemize}
+\tightlist
+\item
+  can modify SGD to take a step downhill on \(J(\theta)\) and then
+  project \(\theta\) back to the nearest point that satisfies
+  \$\Omega(\theta) \textless{} k \$.
+\item
+  useful if we know what value of \(k\) is appropriate and don't want to
+  waste time searching for \(\alpha\) that corresponds to this \(k\)
+\item
+  penalties can cause non-convex optimization procedures to get stuck in
+  local minima corresponding to small \(\theta\)
+\item
+  Explicit constraints implemented by re-projection only have an effect
+  when the weights become large and attempt to leave the constraint
+  region
+\item
+  Explicit constraints with reprojection imposes some stability on the
+  optimization procedure - prevents positive feedback loop from
+  continuing to increase the magnitude of the weights without bound.
+\item
+  In practice, column norm limitation is always implemented as an
+  explicit constraint with reprojection so as to prevent any one hidden
+  unit from having very large weights.
+\item
+  If we converted this constraint into a penalty in a Lagrange function,
+  it would be similar to \(L^2\) weight decay but with a separate KKT
+  multiplier for the weights of each hidden unit
+\end{itemize}
+
+    \hypertarget{regularization-and-under-constrained-problems}{%
+\subsubsection{7.3 Regularization and Under-Constrained
+Problems}\label{regularization-and-under-constrained-problems}}
+
+    Linear Regression, PCA and many other Linear models depend on inverting
+the matrix \(X^{T}X\)
+
+    This is not possible whenever \(X^{T}X\) is singular - when data
+generating distribution has no variance in some direction - when no
+variance is observed in some direction - b/c fewer samples than features
+\(\rightarrow\) Instead invert \(X^{T}X + \alpha I\) This regularized
+matrix is guaranteed to be invertible
+
+    When relevant matrix is invertible, closed form solutions exist Problem
+with no closed form solution can be underdetermined eg. Logistic
+regression where classes are linearly separable and \(w\) is able to
+achieve perfect classification - then \(2w\) will also achieve perfect
+classification and higher likelihood SGD wll continually increase the
+magnitude of \(w\) until numerical overflow occurs Regularization will
+cause SGD to quit increasing the magnitude of the weights
+
+    (7.17) \begin{equation*}
+w = (X^{T} X + \alpha I)^{-1} X^{T} y
+\end{equation*}
+
+    (7.29) - Definition of pseudoinverse \(X^+\) of a matrix \(X\)
+\begin{equation*}
+X^+ = \underset{\alpha\searrow0} {\text{lim}}\: (X^{T}X + \alpha I)^{-1} X^{T}
+\end{equation*}
+
+    (7.29) is the limit of (7.17) as the regularization coefficient shrinks
+to zero
+
+    \hypertarget{dataset-augmentation}{%
+\subsubsection{7.4 Dataset Augmentation}\label{dataset-augmentation}}
+
+    effective/easiest for classification - object recognition - speech
+recognition
+
+    Input Noise - can also bee seen as a form of data augmentation Dropout -
+can be seen as constructing new inputs by multiplying by noise
+
+    \hypertarget{noise-robustness}{%
+\subsubsection{7.5 Noise Robustness}\label{noise-robustness}}
+
+    In general, noise injection can be more powerful than simply shrinking
+parameters, especially when noise is added to the hidden units
+\(\rightarrow\) dropout
+
+    Another way: adding noise to the weights - RNN - can be interpreted as a
+Stochastic implementation of Bayesian inference over the weights -
+Bayesian = model weights are uncertain and representable via a
+probability distribution - Adding noise to the weights = practical,
+stochastic way to reflect this uncertainty - Can also be interpreted as
+pushing the model into regions where the model is relatively insensitive
+to small variations in the weights, finding minima surrounded by flat
+regions
+
+    \hypertarget{injecting-noise-at-the-output-targets}{%
+\paragraph{7.5.1 Injecting Noise at the Output
+Targets}\label{injecting-noise-at-the-output-targets}}
+
+    Most datasets have some amount of mistakes in the \(y\) labels
+\(\rightarrow\) explicitly model the noise on the labels
+
+    . incorporate into the cost function \(\rightarrow\) label smoothing
+
+    Maximum likelihood learning with a softmax classifier and hard targets
+may actually never converge---the softmax can never predict a
+probability of exactly 0 or 1 exactly, so it will continue to learn
+larger and larger weights, making more extreme predictions forever
+
+    \hypertarget{semi-supervised-learning}{%
+\subsubsection{7.6 Semi-Supervised
+Learning}\label{semi-supervised-learning}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Unlabled Examples from \(P(x)\)
+\item
+  Labeled Examples from \(P(x,y)\) are used to estimate \(P(y|x)\)
+\end{enumerate}
+
+    Goal is to learn a representation \(h = f(x)\) so that examples from the
+same class have similar representations
+
+    Construct models in which a generative model of either \(P(x)\) or
+\(P(x,y)\) shares parameters with a discriminative model of \(P(y | x)\)
+
+    Then, trade-off the supervised critereon \(- log P(y | x)\) with
+unsupervised/generative critereon \(-log P(x)\; or\; -logP(x,y)\)
+
+    Generative critereon then expresses a particular form of prior belief
+about the solution to the supervised learning problem
+
+    
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
